@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,20 +18,38 @@ namespace WebVApp
 {
     public sealed partial class MainPage : Page
     {
+        public ObservableCollection<Bookmark> Bookmarks { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            Bookmarks = new ObservableCollection<Bookmark>();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            Uri uri = new Uri(textBox.Text);
-            webView.Navigate(uri);
+            if(textBox.Text != "")
+            {
+                Uri uri = new Uri(textBox.Text);
+                webView.Navigate(uri);
+            }
         }
 
-        private void Bookmarks_Click(object sender, RoutedEventArgs e)
+        private void bookmarksList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //at work
+            Bookmark bookmarksel = bookmarksList.SelectedItem as Bookmark;
+            if (bookmarksel != null)
+            {
+                textBox.Text = bookmarksel.Url;
+            }
+        }
+
+        private void Bookmarks_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            string url = textBox.Text;
+            Bookmarks.Add(new Bookmark { Url = url });
+            textBox.Text = String.Empty;
         }
     }
 }

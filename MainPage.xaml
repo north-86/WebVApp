@@ -28,6 +28,17 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0">
+            <ListBox x:Name="bookmarksList" ItemsSource="{x:Bind Bookmarks}" SelectionChanged="bookmarksList_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:Bookmark">
+                        <StackPanel>
+                            <TextBlock x:Name="textBlock" Text="{x:Bind Url}" FontSize="13" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
         <Button Grid.Column="1" x:Name="btnBookmarks" Click="Bookmarks_Click">
             <Button.Content>
                 <Image Source="/Images/bm.png"/>
