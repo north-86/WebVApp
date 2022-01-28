@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Text.RegularExpressions;
 
 namespace WebVApp
 {
@@ -29,7 +30,8 @@ namespace WebVApp
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            if(textBox.Text != "")
+            string pattern = @"^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$";
+            if (Regex.IsMatch(textBox.Text, pattern))
             {
                 Uri uri = new Uri(textBox.Text);
                 webView.Navigate(uri);
