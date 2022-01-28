@@ -50,6 +50,7 @@
                 <Image Source="/Images/search.png"/>
             </Button.Content>
         </Button>
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="WebVApp" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0 10 0" FontSize="30"/>
         <WebView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" x:Name="webView"/>
     </Grid>
 </Page>
